@@ -1,0 +1,23 @@
+{
+  "name": "quick-js",
+  "version": "0.0.1",
+  "description": "a quick js project",
+  "main": "src/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^0.9.1",
+    "esnext-loader": "^1.1.0",
+    "style-loader": "^0.8.3",
+    "webpack": "^1.5.3"
+  },
+  "scripts": {
+    "start": "webpack --progress --colors --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "fast"
+  ],
+  "author": "Björn Roberg",
+  "license": "ISC",
+  "homepage": "https://github.com/roobie"
+}
