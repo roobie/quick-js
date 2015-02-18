@@ -8,6 +8,17 @@ var abs = function(a) {
   return a < 0 ? -a : a;
 };
 
+var memoize = function (fn) {
+  var cache = {};
+  return function (a){
+    if(a in cache) {
+      return cache[a];
+    } else {
+      return cache[a] = fn.call(this, a);
+    }
+  };
+};
+
 function XY(x, y) {
   assign(this, {
     x: x,
@@ -36,9 +47,30 @@ assign(XY.prototype, {
 var Point = XY;
 
 function AABB(props) {
+  if (!props.half_dim) {
+    // assume width & height is specified
+    props.half_dim = new Point(
+      props.center.x + 0.5 * props.width,
+      props.center.y + 0.5 * props.height
+    );
+  }
   assign(this, {
+
     center: props.center, // Point
-    half_dim: props.half_dim // Point
+    half_dim: props.half_dim, // Point
+
+    half_width: memoize(function() {
+      return this.half_dim.x - this.center.x;
+    }),
+    half_height: memoize(function() {
+      return this.half_dim.y - this.center.y;
+    }),
+    start_x: memoize(function() {
+      return this.center.x - this.half_width();
+    }),
+    start_y: memoize(function() {
+      return this.center.y - this.half_height();
+    })
   });
 }
 
@@ -50,18 +82,6 @@ assign(AABB.prototype, {
       abs(distance.x) <= this.half_dim.x &&
         abs(distance.y) <= this.half_dim.y
     );
-  },
-  half_width: function() {
-    return this.half_dim.x - this.center.x;
-  },
-  half_height: function() {
-    return this.half_dim.y - this.center.y;
-  },
-  start_x: function() {
-    return this.center.x - this.half_width();
-  },
-  start_y: function() {
-    return this.center.y - this.half_height();
   },
   /// other:AABB
   intersects: function aabb_intersects(other) {
@@ -75,11 +95,17 @@ assign(AABB.prototype, {
 const Q = 4;
 function QuadTree(props) {
   assign(this, {
-    boundary: props.boundary || new AABB({}),
-    points: props.points || [],
-    children: props.children || {
-      //nw, ne, sw, se
-    }
+    level: props.level || 0,
+
+    boundary: props.boundary || new AABB({
+      center: new Point(50, 50),
+      half_dim: new Point(100, 100)
+    }),
+
+    points: props.points || [ ],
+
+    //nw, ne, sw, se
+    children: props.children || { }
   });
 }
 
@@ -104,7 +130,30 @@ assign(QuadTree.prototype, {
       this.children.se.insert(p);
   },
   subdivide: function qt_subdivide() {
+    var qt = this;
+    var next_level = this.level + 1,
+        hw = this.bounds.half_width(),
+        hh = this.bounds.half_height(),
+        qw = 0.5 * hw,
+        qh = 0.5 * hh,
+        x = this.bounds.start_x,
+        y = this.bounds.start_y;
 
+    ([
+      { name: 'nw', center: new Point(x + qw, y + qh) },
+      { name: 'ne', center: new Point(x + hw + qw, y + qh) },
+      { name: 'sw', center: new Point(x + qw, y + hh + qh) },
+      { name: 'se', center: new Point(x + qw + hw, y + hh + qh) },
+    ]).forEach(function(child_cfg) {
+      qt.children[child_cfg.name] = new QuadTree({
+        level: next_level,
+        boundary: new AABB({
+          center: child_cfg.center,
+          width: hw,
+          height: hh
+        })
+      });
+    });
   },
   query_range: function qt_query_range(range) {
     var result = [],
