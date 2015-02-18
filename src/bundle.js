@@ -44,13 +44,13 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("var INDEX\n, hello = __webpack_require__(1)\n;\n\nvar greet = function() {\n  return hello.say('Hacker');\n};\ngreet();\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ./src/index.js\n ** module id = 0\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./src/index.js?");
+	eval("var INDEX\r\n, hello = __webpack_require__(1)\r\n;\r\n\r\nvar greet = function() {\n  return hello.say('Hacker');\n};\r\ngreet();\r\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ./src/index.js\n ** module id = 0\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("module.exports = {\n  say: function(recipient) {\n    console.log('Hello,', recipient);\n  }\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ./src/hello.js\n ** module id = 1\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./src/hello.js?");
+	eval("module.exports = {\r\n  say: function(recipient) {\r\n    console.log('Hello,', recipient);\r\n  }\r\n};\r\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ./src/hello.js\n ** module id = 1\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./src/hello.js?");
 
 /***/ }
 /******/ ])
