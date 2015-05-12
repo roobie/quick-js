@@ -1,22 +1,27 @@
 {
-  "name": "quick-js",
+  "name": "quick-js_mithril",
   "version": "0.0.1",
-  "description": "a quick js project",
+  "description": "a quick js project, with mithril",
   "main": "src/index.js",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "css-loader": "^0.9.1",
-    "esnext-loader": "^1.1.0",
     "html-loader": "^0.2.3",
+    "less": "^2.5.0",
+    "less-loader": "^2.2.0",
+    "lodash": "^3.8.0",
+    "mithril": "^0.2.0",
     "object-assign": "^2.0.0",
     "style-loader": "^0.8.3",
     "webpack": "^1.5.3",
     "webpack-dev-server": "^1.7.0"
   },
+  "devDependencies": {
+    "mocha": "^2.2.4"
+  },
   "scripts": {
     "compile": "webpack --progress --colors",
     "serve": "webpack-dev-server --colors --hot --content-base build/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [
     "fast"

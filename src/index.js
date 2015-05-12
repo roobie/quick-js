@@ -1,6 +1,9 @@
 var INDEX
-, hello = require('./hello.js')
+, m = require('mithril')
+, root = require('./modules/root/component')
 ;
 
-var greet = () => hello.say('Hacker');
-greet();
+
+m.route(document.body, '/', {
+  '/': root
+});
