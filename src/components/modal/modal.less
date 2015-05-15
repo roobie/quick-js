@@ -1,31 +1,118 @@
 
 .row {
+  width: 100%;
   display: table-row;
+}
+
+.col {
+  display: table-cell;
+}
+
+.modal * {
+  box-sizing: border-box;
 }
 
 .modal {
   position: fixed;
   top: 0;
 
-  border-left: 10px solid salmon;
+  border-left: 10px solid cornflowerblue;
 
   //background-color: rgba(1,1,1,0.05);
-  background-color: white;
-  padding: 1em;
+  //background-color: white;
+  background-color: transparent;
+  //padding: 1em;
 
   margin: 0 4em;
 
-  display: table;
+  //display: table;
 
   z-index: 10001;
+
+  button {
+    background: none;
+    border: none;
+  }
+
+}
+
+.modal-header,
+.modal-content,
+.modal-footer {
+  width: 100%;
+  display: table;
 }
 
 
 .modal-header {
-  div {
-    //border-bottom: 2px solid salmon;
+  padding: 1em 1em 0;
+
+  background: white;
+
+  h2 {
+    margin: 0;
+  }
+
+  .modal-header-buttons {
+    float:right;
+    display: table-cell;
+
+    button {
+      line-height: 0;
+      font-size: 1.5em;
+      height: 1.5em;
+      width: 1.5em;
+      font-weight: bold;
+
+      &:hover {
+        color: salmon;
+      }
+    }
   }
 }
+
+.modal-content {
+  padding: 1em;
+  background: white;
+}
+
+.modal-content-space {
+  display: table-row;
+}
+
+.modal-footer {
+  .right,
+  .left {
+    padding: 0;
+    margin: 0;
+    display: table-cell;
+    width: 50%;
+  }
+
+  button {
+    padding: 0;
+    margin: 0;
+    display: table-cell;
+    //width: 50%;
+    width: 100%;
+    font-size:2em;
+
+    background: white;
+
+    &:hover {
+      color: white;
+    }
+
+    &.modal-positive:hover {
+      background: springgreen;
+    }
+    &.modal-negative:hover {
+      background: salmon;
+    }
+  }
+}
+
+
 
 .glass {
   position: fixed;
@@ -37,41 +124,6 @@
   background-color: rgba(1,1,1,0.1);
 }
 
-.modal-header,
-.modal-content,
-.modal-footer {
-  display: table-row;
-}
-
-.modal-content-cell {
-  display: table-cell;
-}
-
-.modal-header-title {
-  display: table-cell;
-}
-
-.modal-header-buttons {
-  display: table-cell;
-  button {
-    height: 2em;
-    width: 2em;
-  }
-}
-
-.modal-footer {
-  //.left,
-  .right {
-    display: table;
-  }
-
-  .left {
-    display: table-cell;
-  }
-
-  button {
-    display: table-cell;
-    height: 2em;
-    width: 3em;
-  }
+.modal-glass-overlay {
+  overflow: hidden;
 }

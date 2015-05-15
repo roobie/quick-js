@@ -1,14 +1,11 @@
 var VIEW
 , m = require('mithril')
-, ProgressBar = require('../../components/progress_bar/progress_bar.component.js')
-, Modal = require('../../components/modal/modal.component.js')
+, R = require('ramda')
+, ProgressBar = require('../../components/progress_bar/progress_bar.component')
+, Modal = require('../../components/modal/modal.component')
+, Throbber = require('../../components/throbber/throbber.component')
+, Tree = require('../../components/tree/tree.component')
 ;
-
-function compose(f, g) {
-  return function (argument) {
-    return g(f(argument))
-  }
-}
 
 function toNumber(argument) {
   return Number.parseFloat(argument);
@@ -30,16 +27,48 @@ module.exports = function (ctl) {
         'min': 0,
         'step': 0.01,
         'max': 100,
-        oninput: m.withAttr('value', compose(toNumber, ctl.percent)),
+        oninput: m.withAttr('value', R.compose(ctl.percent, toNumber)),
         value: ctl.percent()
       }),
       m.component(ProgressBar, { percent: ctl.percent, decimalCount: 2 }),
     ]),
+    m('.test3', [
+      m.component(Throbber, {})
+    ]),
+    m('.test4', [
+      m.component(Tree, {
+        data: {
+          value: 'Root',
+          children: [
+            {
+              value: 'Node 1', children: [
+                { value: 'Node 1.1' },
+                {
+                  value: 'Node 1.2', children: [
+                    { value: 'Node 1.2.1' },
+                    { value: 'Node 1.2.2' },
+                    { value: 'Node 1.2.3' },
+                    { value: 'Node 1.2.4' },
+                  ]
+                },
+              ]
+            },
+            {
+              value: 'Node 2',
+              children: [
+                { value: 'Node 2.1' },
+                { value: 'Node 2.2', children: [{ value: 'Node 2.2.1' }] },
+              ]
+            },
+          ]
+        }
+      })
+    ]),
     vm.showModal() ? m.component(Modal, {
-      header: m.prop(m('h2', 'Test')),
+      title: m.prop('Test'),
       ondismiss: vm.showModal.bind(null, false),
       content: m.prop(m('span', 'test j owewoeif jwofjiwoe ifjweofj woefji woifjwoijwoefijw ofijwefoijw gfoijowijowiejf woekfjwldkogwreijg wkefjwo efijwoeifj woek fjweokfjsldkfj eiwf oweifj lkdsjf owiefj owekfj sdlf')),
-      type: 'confirm'
+      type: Math.random() < 0.5 ? 'confirm' : 'alert'
     }) : void 0
   ]);
 };

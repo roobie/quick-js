@@ -11,6 +11,7 @@
     "lodash": "^3.8.0",
     "mithril": "^0.2.0",
     "object-assign": "^2.0.0",
+    "ramda": "^0.14.0",
     "style-loader": "^0.8.3",
     "webpack": "^1.5.3",
     "webpack-dev-server": "^1.7.0"
