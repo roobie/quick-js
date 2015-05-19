@@ -17,23 +17,25 @@ const component = {
     }, [
       R.range(0, indent_level).map(function (_, i) {
         return m('span.node-indenter', {
-          key: i,
+          //key: i, // will never change order, so...
           class: (indent_level -1) === i ? 'last' : ''
         });
       }),
       m('span', [
+        m('span.node-value', {
+          title: '[' + key + ']'
+        }, get_display_value(node.value)),
         ((node.children || []).length ?
           m('span.expander-btn', {
             onclick: function () {
               ctl.vm.expanded(!ctl.vm.expanded());
             }
-          }, ctl.vm.expanded() ? '[-]' : '[+]') : void 0),
-        m('span.node-value', get_display_value(node.value))
+          }, ctl.vm.expanded() ? '[-]' : '[+]') : void 0)
       ]),
-      (ctl.vm.expanded() ? (node.children || []) : []).map(function (child) {
+      (ctl.vm.expanded() ? (node.children || []) : []).map(function (child, i) {
         return m.component(component, {
           node: child,
-          key: key + 1,
+          key: i,
           expanded: args.expanded,
           indent_level: indent_level + 1
         })
