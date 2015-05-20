@@ -3,5 +3,5 @@ var CONTROLLER
 ;
 
 module.exports = function ProgressBar_controller(args) {
-  this.percent = args.percent || m.prop(0);
+  this.percent = m.prop(args.percent) || m.prop(0);
 };

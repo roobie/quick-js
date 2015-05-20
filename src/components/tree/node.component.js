@@ -1,6 +1,7 @@
 var CTL
 , m = require('mithril')
 , R = require('ramda')
+, K = require('../../lib/karn/lib')
 ;
 
 
@@ -9,7 +10,6 @@ const component = {
     const node = args.node;
     const indent_level = args.indent_level || 0;
     const key = args.key || 0;
-    const get_display_value = args.get_display_value || R.identity;
 
     return m('div', {
       key: key,
@@ -17,25 +17,31 @@ const component = {
     }, [
       R.range(0, indent_level).map(function (_, i) {
         return m('span.node-indenter', {
-          //key: i, // will never change order, so...
+          //key: , // will never change order, so...
           class: (indent_level -1) === i ? 'last' : ''
         });
       }),
-      m('span', [
+      m('span', {
+        class: (node.children() || []).length ?
+          'has-children' : 'has-no-children'
+      }, [
         m('span.node-value', {
-          title: '[' + key + ']'
-        }, get_display_value(node.value)),
-        ((node.children || []).length ?
-          m('span.expander-btn', {
+          title: 'KEY: [' + key + ']'
+        }, node.value()),
+
+        K.provided(
+          m.prop((node.children() || []).length),
+          R.always(m('span.expander-btn.unselectable.pointer-cursor', {
+            unselectable: 'on',
             onclick: function () {
               ctl.vm.expanded(!ctl.vm.expanded());
             }
-          }, ctl.vm.expanded() ? '[-]' : '[+]') : void 0)
+          }, ctl.vm.expanded() ? '[-]' : '[+]')))
       ]),
-      (ctl.vm.expanded() ? (node.children || []) : []).map(function (child, i) {
+      (ctl.vm.expanded() ? (node.children() || []) : []).map(function (child, i) {
         return m.component(component, {
           node: child,
-          key: i,
+          key: String(key) + ':' + String(i),
           expanded: args.expanded,
           indent_level: indent_level + 1
         })
