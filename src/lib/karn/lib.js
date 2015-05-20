@@ -1,4 +1,6 @@
-module.exports = {
+const K = {
+
+  noop: function () {},
 
   /// `provided`
   /// usage:
@@ -13,6 +15,13 @@ module.exports = {
   ///   return 'count is now 1';
   /// }, [1]); // => 'count is now 1'
   provided: function Karn_provided(predicate, transform, args) {
-    if (predicate()) return transform.apply(this, args);
+    if ((predicate || K.noop)()) return transform.apply(this, args);
+  },
+
+  /// `iif` - inline if
+  iif: function Karn_iif(bool, value) {
+    if (bool) return value;
   }
 };
+
+module.exports = K;

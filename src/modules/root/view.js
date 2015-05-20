@@ -6,6 +6,7 @@ var VIEW
 , Modal = require('../../components/modal/modal.component')
 , Throbber = require('../../components/throbber/throbber.component')
 , Tree = require('../../components/tree/tree.component')
+, ComboBox = require('../../components/combo_box/combo_box.component')
 , NodeModel = require('../../models/node')
 ;
 
@@ -35,7 +36,50 @@ module.exports = function (ctl) {
       m.component(ProgressBar, { percent: ctl.percent(), decimalCount: 2 }),
     ]),
     m('.test3', [
-      m.component(Throbber, {})
+      m.component(ComboBox, {
+        async: true,
+        data: function (query) {
+          var data = [
+            {
+              title: m.prop('JavaScript'),
+              descr: m.prop('JavaScript (/ˈdʒɑːvɑːˌskrɪpt/; JS), also known as ECMAScript (the untrademarked name used for the standard), is a dynamic programming language.')
+              //descr: m.request({
+              //  dataType: 'jsonp',
+              //  url: 'http://en.wikipedia.org/w/api.php?action=query&titles=JavaScript&prop=revisions&rvprop=content&format=json'
+              //}).then(function (data) {
+              //  return data.query.pages[9845].revisions[0]['*'].split('\n\n')[1].slice(0, 100)
+              //})
+            },
+            {title: m.prop('Java')},
+            {title: m.prop('Clojure')},
+            {title: m.prop('F♯')},
+            {title: m.prop('C♯')},
+          ].filter(function (item) {
+            return item.title().toLowerCase().indexOf(query) !== -1;
+          });
+          var d = m.deferred();
+
+          m.startComputation();
+          setTimeout(function () {
+            d.resolve(query ? data : []);
+            m.endComputation();
+            //m.redraw();
+          });
+          return d.promise;
+        },
+        filter: function (query, item) {
+          return item.title().toLowerCase().indexOf(query) !== -1;
+        },
+        get_match: function (match) {
+          return m('.a-match', [
+            m('dt', match.title()),
+            K.provided(match.descr, function () {
+              return m('dd', '— ' + match.descr());
+            })
+          ]);
+        }
+      })
+      //m.component(Throbber, {})
     ]),
     m('.test4', [
       m.component(Tree, {
