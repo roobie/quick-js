@@ -7,6 +7,8 @@ var VIEW
 , Throbber = require('../../components/throbber/throbber.component')
 , Tree = require('../../components/tree/tree.component')
 , ComboBox = require('../../components/combo_box/combo_box.component')
+, Pane = require('../../components/pane/pane.component')
+
 , NodeModel = require('../../models/node')
 ;
 
@@ -20,6 +22,8 @@ var vm = {
 
 module.exports = function (ctl) {
   return m('.root-page', [
+    //m.component(Pane.base, {content: 'Hello'}),
+    Pane.base.view(ctl.pane),
     m('.test1', [
       m('button[type="button"]', {
         onclick: vm.showModal.bind(null, true)
@@ -88,10 +92,20 @@ module.exports = function (ctl) {
           children: [
             {
               value: 'Node 1', children: [
-                { value: 'Node 1.1' },
+                {
+                  value: 'Node 1.1', children: [
+                    { value: 'Node 1.1.1' },
+                    { value: 'Node 1.1.2' },
+                  ]
+                },
                 {
                   value: 'Node 1.2', children: [
-                    { value: 'Node 1.2.1' },
+                    {
+                      value: 'Node 1.2.1', children: [
+                        { value: 'Node 1.2.1.1' },
+                        { value: 'Node 1.2.1.2' },
+                      ]
+                    },
                     { value: 'Node 1.2.2' },
                     { value: 'Node 1.2.3' },
                     { value: 'Node 1.2.4' },

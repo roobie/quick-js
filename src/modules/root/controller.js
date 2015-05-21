@@ -1,6 +1,7 @@
 'use strict';
 var VIEW
 , m = require('mithril')
+, Pane = require('../../components/pane/pane.component')
 ;
 
 function RootPageVm(props) {
@@ -18,4 +19,6 @@ module.exports = function () {
   // }
 
   this.percent = m.prop(0);
+
+  this.pane = new Pane.base.controller({ content: 'Test' });
 }

@@ -22,13 +22,27 @@
   width: 1em;
   display: inline-block;
   position: relative;
-  top: -0em;
+  top: -0.24em;
   height: 1em;
 
-  &.last {
+  //&.last {
+  &.first {
     border-left: 1px solid silver;
-    border-bottom: 1px solid silver;
   }
+  border-bottom: 1px solid silver;
+}
+
+.tree-node {
+  border-left: 1px solid silver;
+  margin-left: 1.15em;
+}
+.tree-node.root {
+  border-left: none;
+  margin-left: 0;
+}
+
+.tree-node.indent-1 {
+  margin-left: 0.15em;
 }
 
 .expander-btn {
