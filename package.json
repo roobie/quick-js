@@ -4,8 +4,11 @@
   "description": "a quick js project",
   "main": "src/index.js",
   "dependencies": {
+    "geval": "^2.1.1",
     "mercury": "^14.0.0",
-    "ramda": "^0.14.0"
+    "ramda": "^0.14.0",
+    "weakmap-shim": "^1.1.0",
+    "xtend": "^4.0.0"
   },
   "devDependencies": {
     "css-loader": "^0.9.1",
