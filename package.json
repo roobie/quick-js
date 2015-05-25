@@ -3,11 +3,15 @@
   "version": "0.0.1",
   "description": "a quick js project",
   "main": "src/index.js",
-  "dependencies": {},
+  "dependencies": {
+    "ramda": "^0.14.0"
+  },
   "devDependencies": {
     "css-loader": "^0.9.1",
     "esnext-loader": "^1.1.0",
     "html-loader": "^0.2.3",
+    "less": "^2.5.1",
+    "less-loader": "^2.2.0",
     "object-assign": "^2.0.0",
     "style-loader": "^0.8.3",
     "webpack": "^1.5.3",
