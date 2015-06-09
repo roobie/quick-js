@@ -4,6 +4,10 @@
   "description": "a quick js project",
   "main": "src/index.js",
   "dependencies": {
+    "flyd": "^0.1.10",
+    "flyd-every": "0.0.1",
+    "flyd-sampleon": "^1.0.3",
+    "mercury": "^14.0.0",
     "ramda": "^0.14.0"
   },
   "devDependencies": {
