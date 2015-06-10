@@ -1,5 +1,3 @@
-// Karma configuration
-// Generated on Thu Feb 05 2015 09:37:08 GMT+0100 (W. Europe Standard Time)
 
 module.exports = function(config) {
   config.set({
@@ -12,8 +10,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      //'node_modules/chai/chai.js',
-      //'test/utilities/*.js',
       'src/**/*.js',
       'test/**/*.js'
     ],
@@ -29,7 +25,11 @@ module.exports = function(config) {
       // source files, that you wanna generate coverage for
       // do not include tests or libraries
       // (these files will be instrumented by Istanbul)
-      'src/**/*.js': [ 'babel', 'browserify', 'coverage' ]
+      'src/**/*.js': [
+        'babel',
+        'browserify'
+        //'coverage'
+      ]
     },
 
     browserify: {
@@ -39,7 +39,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress'],
 
     // web server port
     port: 9876,
@@ -54,17 +54,9 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
-    coverageReporter: {
-      // specify a common output directory
-      dir: 'coverage',
-      reporters: [
-        { type: 'html', subdir: 'report-html' }
-      ]
-    },
-
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits

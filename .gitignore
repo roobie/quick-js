@@ -29,5 +29,5 @@ node_modules
 
 *.swp
 
-build
-dist/bundle.*
+build/*
+dist/*

@@ -12,6 +12,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var babel = require("gulp-babel");
 var concat = require("gulp-concat");
 var jshint = require("gulp-jshint");
+var changed = require('gulp-changed');
 
 var serve = require('gulp-serve');
 
@@ -25,6 +26,10 @@ gulp.task('lint', function () {
   gulp.src(['src/**/*.js', 'test/**/*.js'])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'));
+});
+
+gulp.task('watch-lint', function () {
+    gulp.watch(['src/**/*.js', 'test/**/*.js'], ['lint']);
 });
 
 // add custom browserify options here
