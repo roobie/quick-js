@@ -30,4 +30,4 @@ node_modules
 *.swp
 
 build/*
-dist/*
+dist/bundle.*
