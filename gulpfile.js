@@ -12,5 +12,6 @@ require('./build_scripts/test');
 gulp.task("default", [
   'lint',
   'tdd',
-  'js'
+  'js',
+  'serve'
 ]);

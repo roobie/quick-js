@@ -13,7 +13,12 @@ var babel = require("gulp-babel");
 var concat = require("gulp-concat");
 var jshint = require("gulp-jshint");
 
+var serve = require('gulp-serve');
+
 var assign = require('object-assign');
+
+
+gulp.task('serve', serve('dist'));
 
 
 gulp.task('lint', function () {
