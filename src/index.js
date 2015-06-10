@@ -1,6 +1,8 @@
-var INDEX
-, hello = require('./hello.js')
+'use strict';
+
+var
+hello = require('./components/greet')
 ;
 
-var greet = () => hello.say('Hacker');
-greet();
+//
+console.log(hello('kewl guy'));
