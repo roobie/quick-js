@@ -11,21 +11,22 @@ var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var babel = require("gulp-babel");
 var concat = require("gulp-concat");
+
 var jshint = require("gulp-jshint");
+var jscs = require('gulp-jscs');
+
 var changed = require('gulp-changed');
-
 var serve = require('gulp-serve');
-
 var assign = require('object-assign');
 
 
 gulp.task('serve', serve('dist'));
 
-
 gulp.task('lint', function () {
   gulp.src(['src/**/*.js', 'test/**/*.js'])
     .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jscs());
 });
 
 gulp.task('watch-lint', function () {

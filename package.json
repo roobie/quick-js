@@ -21,6 +21,7 @@
     "gulp-babel": "^5.1.0",
     "gulp-changed": "^1.2.1",
     "gulp-concat": "^2.5.2",
+    "gulp-jscs": "^1.6.0",
     "gulp-jshint": "^1.11.0",
     "gulp-mocha": "^2.1.1",
     "gulp-serve": "^1.0.0",
