@@ -4,12 +4,14 @@
   "description": "a quick js project",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test-suite"
   },
   "dependencies": {
     "allong.es": "^0.14.0",
+    "es6-promise-polyfill": "^1.0.0",
     "functional-js": "^1.0.1",
-    "ramda": "^0.14.0"
+    "ramda": "^0.14.0",
+    "whatwg-fetch": "^0.9.0"
   },
   "devDependencies": {
     "babel-core": "^5.5.6",

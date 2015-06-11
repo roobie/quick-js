@@ -43,3 +43,8 @@ gulp.task('mocha', function() {
 gulp.task('watch-mocha', function() {
     gulp.watch(['src/**', 'test/server/**'], ['mocha']);
 });
+
+gulp.task('test-suite', [
+  'karma',
+  'mocha'
+]);
