@@ -14,7 +14,6 @@ gulp.task('karma', function (done) {
   }, done);
 });
 
-
 /**
  * Watch for file changes and re-run tests on each change
  */
@@ -22,15 +21,6 @@ gulp.task('tdd', function (done) {
   karma.start({
     configFile: __dirname + '/../karma.conf.js'
   }, done);
-});
-
-gulp.task('test', function() {
-  return gulp.src('test/**/*.js')
-    .pipe(babel())
-    .pipe(mocha({
-      reporter: 'spec',
-      globals: ['expect']
-    }));
 });
 
 gulp.task('mocha', function() {
