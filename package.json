@@ -41,7 +41,7 @@
     "less": "^2.5.1",
     "lodash": "^3.9.3",
     "mocha": "^2.2.5",
-    "object-assign": "^2.0.0",
+    "object-assign": "^3.0.0",
     "phantomjs": "^1.9.17",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
