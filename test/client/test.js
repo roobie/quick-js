@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 
-let greet = require('../../src/components/greet');
+let greet = (n) => 'hello, ' + n;
 
 describe('phantomjs', () => {
   it('should have the Function.prototype.bind polyfill', () => {

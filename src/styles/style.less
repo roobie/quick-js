@@ -1,0 +1,85 @@
+@import "variables.less";
+@import "mixins.less";
+
+// LESS
+
+body {
+  .monospace-font();
+  background-color: #eee;
+}
+
+.hide {
+  display: none !important;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.icon-bar {
+  background-color: darkslategray;
+}
+
+//@media (max-width: 768px) {
+  body {
+    font-size: 28px;
+  }
+
+  ul.nav {
+    background-color: #fff;
+    list-style: none;
+    padding: 0;
+    text-align: center;
+  }
+
+  .nav li {
+    display: block;
+  }
+
+  .nav a {
+    display: block;
+    width: 100%;
+  }
+
+  .nav a span {
+    margin: 0 auto;
+  }
+
+
+  .nav > li {
+    padding: 2px;
+  }
+
+  .nav > li.active {
+    background-color: cornflowerblue;
+  }
+
+  .nav > li.active a {
+    color: white;
+  }
+
+  .navbar-brand {
+    font-size: 1em;
+    margin-top: 6px;
+    line-height: 1em;
+  }
+
+  .navbar-nav > li > a {
+    padding: 1em 0.5em;
+  }
+
+  header.navbar {
+    color: salmon;
+    background: rgba(100, 149, 237, 0.1);
+  }
+
+  header.navbar a {
+    color: salmon
+  }
+
+  h1 {
+    font-size: 0.3em;
+    margin: 0 0 0.3em;
+    border-bottom: 1px solid silver;
+  }
+//}

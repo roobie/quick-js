@@ -4,9 +4,13 @@ if (typeof Function.prototype.bind !== 'function') {
   require('../temp/phantom').init();
 }
 
-var
-hello = require('./components/greet')
+var m = require('mithril')
 ;
 
-// test
-console.log(hello('kewl guy'));
+
+//setup routes to start w/ the `#` symbol
+m.route.mode = 'hash';
+m.route(document.body, '/', {
+  '/': require('./components/root'),
+  '/test': require('./components/root')
+})

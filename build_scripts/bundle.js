@@ -5,10 +5,10 @@ var browserify = require('browserify');
 var babelify = require("babelify");
 
 var gulp = require('gulp');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var babel = require("gulp-babel");
 var concat = require("gulp-concat");
 
@@ -26,7 +26,8 @@ gulp.task('lint', function () {
   gulp.src(['src/**/*.js', 'test/**/*.js'])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jscs());
+    .pipe(jscs())
+    .on('error', gutil.log);
 });
 
 gulp.task('watch-lint', function () {
