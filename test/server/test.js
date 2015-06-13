@@ -4,7 +4,13 @@ var expect = require('chai').expect;
 let fjs = require('functional.js')
 let aug = require('../../src/lib/aug')
 
-describe('aug', () => {
+describe('template', () => {
+  it('should ', () => {
+    expect(1).to.equal(1)
+  })
+})
+
+describe('aug->', () => {
   let a1 = aug([])
   let a2 = aug([9, 2, 5, 4])
   let a3 = aug();
@@ -14,8 +20,10 @@ describe('aug', () => {
   let not = (a) => !a
   let even = (item) => item % 2 === 0
   let odd = aug(even).compose(not)
+  let t = () => true
+  let f = aug(t).compose(not)
 
-  describe('::array->reduce', () => {
+  describe('Array::reduce', () => {
     it('should work as usual', () => {
       let cat1 = [a2, a4].reduce((a, b) => a.concat(b))
       let cat2 = aug([a2, a4]).reduce((a, b) => a.concat(b))
@@ -26,7 +34,47 @@ describe('aug', () => {
     })
   })
 
-  describe('::array->partition', () => {
+  describe('Array::first', () => {
+    it('should give the first item', () => {
+      expect(a2.first(odd)).to.equal(a2[0])
+    })
+  })
+
+  describe('Array::rest', () => {
+    it('should give the rest', () => {
+      expect(a2.rest(t)).to.deep.equal(a2.slice(1))
+    })
+  })
+
+  describe('Array::every', () => {
+    it('should give true if all are true', () => {
+      expect(a2.every(t)).to.equal(true)
+      expect(a2.every(f)).to.equal(false)
+    })
+  })
+
+  describe('Array::any', () => {
+    it('should give true if all are true', () => {
+      expect(a2.any(t)).to.equal(true)
+      expect(a2.any(f)).to.equal(false)
+      expect(a2.any(odd)).to.equal(true)
+    })
+  })
+
+  describe('Array::pluck', () => {
+    it('should give the values of the supplied property', () => {
+      expect(a5.pluck('length')).to.deep.equal(a5.map((s) => s.length))
+    })
+  })
+
+  describe('Array::best', () => {
+    it('should give the value that scores the most', () => {
+      expect(a5.best((a, b) => a.length > b.length))
+        .to.equal(a5.sort((a, b) => a.length < b.length).first(t))
+    })
+  })
+
+  describe('Array::partition', () => {
     it(`should work by partitioning the collection into
     ones that pass the test, and those that don't`, () => {
       let parts = a2.partition(even)
@@ -37,7 +85,7 @@ describe('aug', () => {
     })
   })
 
-  describe('::array->group', () => {
+  describe('Array::group', () => {
     it(`should work by grouping elements by the value from
     the iterator`, () => {
       let iter = (item) => item.charAt(0)
@@ -50,7 +98,7 @@ describe('aug', () => {
     })
   })
 
-  describe('::existentials', () => {
+  describe('existentials', () => {
     it('should report true', () => {
       expect(a1.exists()).to.equal(true)
       expect(a1.truthy()).to.equal(true)

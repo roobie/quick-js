@@ -46,29 +46,29 @@ module.exports = function aug(any) {
     ]
   }
 
+  let value = any
   if (any === null || any === void 0) {
     // return an optional
-    let val = any
     any = {}
     fjs.each(function (ext) {
       any[ext] = (() => {
         return fjs[ext](this);
-      }).bind(val)
+      }).bind(value)
     }, aexts.existentials)
 
-    any.valueOf = () => val
+    any.valueOf = () => value
 
     return any
   }
 
   let box = (Ctor, val) => new Ctor(val)
 
-  let gany = () => any;
+  let anyf = () => any;
   any = (({
     number: () => box(Number, any),
     string: () => box(String, any),
     boolean: () => box(Boolean, any)
-  }[typeof any]) || gany)()
+  }[typeof any]) || anyf)()
 
   var exts = []
   if (fjs.isFunction(any)) {
@@ -86,6 +86,7 @@ module.exports = function aug(any) {
   fjs.each(function (ext) {
     any[ext] = (fn) => {
       return fjs[ext](fn, any);
+      //return fjs[ext](aug(fn), any);
     }
   }, exts)
 
