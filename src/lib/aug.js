@@ -1,7 +1,7 @@
 'use strict';
-let fjs = require('functional.js')
+let fjs = require('functional.js');
 
-module.exports = function aug(any) {
+module.exports = function $aug(any) {
   let aexts = {
     array: [
       // Array
@@ -44,58 +44,69 @@ module.exports = function aug(any) {
       'truthy',
       'falsy'
     ]
-  }
+  };
 
-  let value = any
+  let value = any;
   if (any === null || any === void 0) {
     // return an optional
-    any = {}
+    any = {};
     fjs.each(function (ext) {
       any[ext] = (() => {
         return fjs[ext](this);
-      }).bind(value)
-    }, aexts.existentials)
+      }).bind(value);
+    }, aexts.existentials);
 
-    any.valueOf = () => value
+    any.valueOf = () => value;
 
-    return any
+    return any;
   }
 
-  let box = (Ctor, val) => new Ctor(val)
+  let box = (Ctor, val) => new Ctor(val);
 
   let anyf = () => any;
   any = (({
     number: () => box(Number, any),
     string: () => box(String, any),
     boolean: () => box(Boolean, any)
-  }[typeof any]) || anyf)()
+  }[typeof any]) || anyf)();
 
-  var exts = []
+  var exts = [];
   if (fjs.isFunction(any)) {
-    exts = aexts.function
+    exts = aexts.function;
   } else { // if (fjs.isArray(any) || fjs.isString(any)) {
     exts = fjs.reduce(function (a, b) {
-      return a.concat(b)
+      return a.concat(b);
     }, [
       aexts.array,
       aexts.object
-    ])
+    ]);
   }
 
   // binary functions
   fjs.each(function (ext) {
-    any[ext] = (fn) => {
-      return fjs[ext](fn, any);
-      //return fjs[ext](aug(fn), any);
-    }
-  }, exts)
+    // any[ext] = (fn) => {
+    //   return fjs[ext](fn, any);
+    //   //return fjs[ext](aug(fn), any);
+    // }
+    Object.defineProperty(any, ext, {
+      value: (fn) => {
+        return fjs[ext](fn, any);
+        //return aug(fjs[ext](fn, any))
+      }
+    });
+  }, exts);
 
   // unary functions
   fjs.each(function (ext) {
-    any[ext] = () => {
-      return fjs[ext](any.valueOf());
-    }
-  }, aexts.existentials)
+    // any[ext] = () => {
+    //   return fjs[ext](any.valueOf());
+    // }
+    Object.defineProperty(any, ext, {
+      value: () => {
+        return fjs[ext](any.valueOf());
+      }
+    });
+  }, aexts.existentials);
 
-  return any
-}
+  return any;
+};

@@ -13,4 +13,4 @@ m.route.mode = 'hash';
 m.route(document.body, '/', {
   '/': require('./components/root'),
   '/test': require('./components/root')
-})
+});
