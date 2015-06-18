@@ -5,6 +5,7 @@ const flyd = require('flyd');
 const m = require('mithril');
 
 const ItemsRepo = require('../api/items');
+const UsersRepo = require('../api/users');
 
 const Either = require('../lib/Either');
 
@@ -13,32 +14,48 @@ const Either = require('../lib/Either');
 
 window.aug = require('../lib/aug');
 
-const init = function init(cfg) {
-  const itemsRepo = new ItemsRepo();
-  itemsRepo.getList();
 
-  return {
-    itemsRepo,
+const init = function init(cfg) {
+  const usersRepo = new UsersRepo(true);
+  const state = {
+    users: [],
+    usersRepo,
     expanded: !1,
     cfg
   };
+
+  usersRepo.list$.map(function (result) {
+    Either.match(result, {
+      right: (users) => state.users = users,
+      left: (reason) => {
+        state.message = `Could not fetch users. ${reason.message}`;
+      }
+    });
+  });
+
+  return state;
+};
+
+const provided = function (p, fn) {
+  if (p) {
+    return fn();
+  }
 };
 
 const view = function view(state, cfg) {
   let layout = require('../layout/main');
 
-  let items = [];
-  flyd.map(function (list) {
-    items = Either.match(list, {
-      right: (a) => a
-    });
-  }, state.itemsRepo.list$);
-
   return layout(state, () =>
     m('div', [
       m('h1', 'hello'),
-      m('div', items.map(function (it) {
-        return m('h2', it.name);
+      provided(state.message, () => m('div', state.message)),
+      m('div', [
+        m('button[type=button]', {
+          onclick: () => state.usersRepo.getList()
+        }, 'Reload')
+      ]),
+      m('div', state.users.map(function (it) {
+        return m('pre', JSON.stringify(it, null, 2));
       }))
     ]), cfg);
 };

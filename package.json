@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "allong.es": "^0.14.0",
+    "es6-promise": "^2.3.0",
     "es6-promise-polyfill": "^1.0.0",
     "flyd": "^0.1.11",
     "functional.js": "^0.6.15",
