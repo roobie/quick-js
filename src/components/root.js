@@ -26,7 +26,10 @@ const init = function init(cfg) {
 
   usersRepo.list$.map(function (result) {
     Either.match(result, {
-      right: (users) => state.users = users,
+      right: (users) => {
+        state.message = '';
+        state.users = users;
+      },
       left: (reason) => {
         state.message = `Could not fetch users. ${reason.message}`;
       }

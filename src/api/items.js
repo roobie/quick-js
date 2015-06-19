@@ -1,7 +1,5 @@
 'use strict';
 
-const m = require('mithril');
-
 const flyd = require('flyd');
 const stream = flyd.stream;
 const Either = require('../lib/Either');

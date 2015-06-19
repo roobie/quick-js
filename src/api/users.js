@@ -3,6 +3,7 @@
 const flyd = require('flyd');
 const stream = flyd.stream;
 const Either = require('../lib/Either');
+const fjs = require('functional.js');
 
 require('es6-promise');
 require('whatwg-fetch');
@@ -20,10 +21,17 @@ const UsersRepo = function UsersRepo(load) {
   }
 };
 
+const times = function (num) {
+  return function (a) {
+    return num * a;
+  }
+};
+
+const getRandomOffset = fjs.compose(Math.floor, times(5000), Math.random);
+
 UsersRepo.prototype.getList = function () {
-  const randomOffset = Math.random() * 50000 | 0;
-  let url = `${API_URL}?since=${randomOffset}`;
-  let fail = true;
+  let url = `${API_URL}?since=${getRandomOffset()}`;
+  let fail = Math.random() < 0.2;
   if (fail) {
     url = 'https://api.github.com/users/';
   }

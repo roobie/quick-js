@@ -3,29 +3,34 @@
 const m = require('mithril');
 const Either = require('../lib/Either');
 
-const unwrap = function (stream, isSuccess) {
-  return (result) => {
-    return result.stack ?
-      result.stack :
-      result.json().then((data) => {
-        const either = isSuccess ? Either.right : Either.left;
-
-        stream(either(data));
-
-        // mithril integration - at the very end
-        m.endComputation();
-        return data;
-      });
-  };
-};
-
 const request = function (promise, stream) {
   m.startComputation();
 
-  const unwrapRight = unwrap(stream, true);
-  const unwrapLeft = unwrap(stream);
+  const done = function (either) {
+    stream(either);
+
+    m.endComputation();
+    return either;
+  };
+
+  const isSuccess = function (status) {
+    return 200 <= status && status < 300;
+  };
+
+  const unwrapRight = function (result) {
+    return result.json().then(function (data) {
+      if (isSuccess(result.status)) {
+        return done(Either.right(data));
+      }
+
+      return done(Either.left(data));
+    });
+  };
+  const unwrapLeft = function (reason) {
+    return done(Either.left(reason));
+  };
 
   return promise.then(unwrapRight, unwrapLeft);
-}
+};
 
 module.exports = request;
