@@ -13,6 +13,7 @@ require('./build_scripts/test');
 gulp.task("default", [
   'lint',
   'watch-lint',
+  'robohydra',
   'less',
   'watch-less',
   'tdd',

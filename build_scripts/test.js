@@ -5,17 +5,11 @@ var babel = require("gulp-babel");
 
 var karma = require('karma').server;
 
-var ApiMock = require('api-mock');
+var run = require('gulp-run');
 
-gulp.task('api-mock', function () {
-  var mockServer = new ApiMock({
-    blueprintPath: 'api_mock/blueprint.md',
-    options: {
-      port: 5557
-    }
-  });
-  mockServer.run();
-});
+gulp.task('robohydra', function () {
+  return run('robohydra robohydra/conf.json').exec();
+})
 
 /**
  * Run test once and exit
