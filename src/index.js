@@ -12,5 +12,6 @@ var m = require('mithril')
 m.route.mode = 'hash';
 m.route(document.body, '/', {
   '/': require('./components/root'),
-  '/test': require('./components/root')
+  '/test': require('./components/root'),
+  '/clock': require('./components/clock')
 });

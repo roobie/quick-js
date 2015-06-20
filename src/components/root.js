@@ -46,6 +46,7 @@ const provided = function (p, fn) {
 };
 
 const view = function view(state, cfg) {
+  document.title = 'Root';
   let layout = require('../layout/main');
 
   return layout(state, () =>

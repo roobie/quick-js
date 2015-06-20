@@ -4,7 +4,8 @@ const m = require('mithril');
 
 const navNodes = [
   {title: 'Root', path: '/'},
-  {title: 'Test', path: '/test'}
+  {title: 'Test', path: '/test'},
+  {title: 'Clock', path: '/clock'}
 ];
 
 const handedness = [
@@ -20,7 +21,7 @@ const header = function header(state) {
           onclick: function () {
             state.expanded = !state.expanded;
           }
-        }, 'm');
+        }, m.trust('&#9776;'));
       })),
       m('ul.nav', {
         class: state.expanded ? '' : 'hide'
