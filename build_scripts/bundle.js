@@ -13,6 +13,7 @@ var babel = require("gulp-babel");
 var concat = require("gulp-concat");
 
 var jshint = require("gulp-jshint");
+var eslint = require('gulp-eslint');
 var jscs = require('gulp-jscs');
 
 var changed = require('gulp-changed');
@@ -24,10 +25,15 @@ gulp.task('serve', serve('dist'));
 
 gulp.task('lint', function () {
   gulp.src(['src/**/*.js', 'test/**/*.js'])
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jscs())
-    .on('error', gutil.log);
+    // eslint() attaches the lint output to the eslint property
+    // of the file object so it can be used by other modules.
+    .pipe(eslint())
+    // eslint.format() outputs the lint results to the console.
+    // Alternatively use eslint.formatEach() (see Docs).
+    .pipe(eslint.format());
+    // To have the process exit with an error code (1) on
+    // lint error, return the stream and pipe to failOnError last.
+    //.pipe(eslint.failOnError());
 });
 
 gulp.task('watch-lint', function () {

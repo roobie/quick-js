@@ -1,5 +1,9 @@
 'use strict';
 
+import {and} from "trine/boolean/and";
+
+console.log(true::and(false))
+
 const flyd = require('flyd');
 const stream = flyd.stream;
 const m = require('mithril');
@@ -38,18 +42,24 @@ const view = function (state) {
   let layout = require('../layout/main');
   const deg = 360 - 6 * new Date(state.time).getSeconds();
   const rot = 'rotate(' + deg + 'deg)';
+  const getStyle = () => {
+    const a = {
+      position: 'relative',
+      left: '100px',
+      width: '100px',
+      height: '2px',
+      color: '#333',
+      'background-color': '#333',
+      transform: rot
+    };
+    return {};
+  };
 
   return layout(state, () => m('div.clock', [
     m('span', new Date(state.time).toLocaleString()),
     m('div.face', [
       m('div', {
-        style: {
-          width: '100px',
-          height: '2px',
-          color: '#333',
-          'background-color': '#333',
-          transform: rot
-        }
+        style: getStyle()
       }, '')
     ])
   ]));
