@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
-var concat = require("gulp-concat");
+var concat = require('gulp-concat');
 
 var less = require('gulp-less');
 var path = require('path');
@@ -14,9 +14,9 @@ gulp.task('less', function () {
     .pipe(less({
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
-    .pipe(concat("bundle.css"))
+    .pipe(concat('bundle.css'))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('dist/css'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch-less', function () {

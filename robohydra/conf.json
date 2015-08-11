@@ -1,8 +1,8 @@
 {
-  "port": 3009,
+  "port": 3000,
   "plugins": [
-    "logger",
     "cors",
-    "items"
+    "items",
+    "serve"
   ]
 }

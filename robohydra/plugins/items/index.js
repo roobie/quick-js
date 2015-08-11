@@ -8,10 +8,10 @@ exports.getBodyParts = function(/*conf*/) {
         content: {
           'success': true,
           'results': [
-            {'url': 'http://robohydra.org',
-             'title': 'RoboHydra testing tool'},
-            {'url': 'http://en.wikipedia.org/wiki/Hydra',
-             'title': 'Hydra - Wikipedia'}
+            {url: 'http://robohydra.org',
+             title: 'RoboHydra testing tool'},
+            {url: 'http://en.wikipedia.org/wiki/Hydra',
+             title: 'Hydra - Wikipedia'}
           ]
         }
       })

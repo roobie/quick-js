@@ -2,15 +2,15 @@
 
 var watchify = require('watchify');
 var browserify = require('browserify');
-var babelify = require("babelify");
+var babelify = require('babelify');
 
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
-var babel = require("gulp-babel");
-var concat = require("gulp-concat");
+var babel = require('gulp-babel');
+var concat = require('gulp-concat');
 
 var eslint = require('gulp-eslint');
 //var jscs = require('gulp-jscs');
@@ -72,10 +72,10 @@ b.on('update', bundle); // on any dep update, runs the bundler
 b.on('log', gutil.log); // output build logs to terminal
 
 gulp.task('build', function () {
-  return gulp.src("src/**/*.js")
+  return gulp.src('src/**/*.js')
     .pipe(sourcemaps.init())
-    .pipe(concat("bundle.js"))
+    .pipe(concat('bundle.js'))
     .pipe(babel())
-    .pipe(sourcemaps.write("."))
-    .pipe(gulp.dest("dist"));
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist'));
 })
