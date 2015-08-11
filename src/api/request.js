@@ -9,8 +9,8 @@ export default function request(promise, stream) {
     return either;
   };
 
-  const unwrapSuccess = function (result) {
-    return done(Either.right(result));
+  const unwrapSuccess = function (data) {
+    return done(Either.right(data.results));
   };
   const unwrapFail = function (reason) {
     return done(Either.left(reason));

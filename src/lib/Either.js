@@ -17,9 +17,7 @@ let message = Either.match(getThing(true), {
   left: (err) => err.message
 }); // message === 'such success'
 */
-const Either = function Either() {};
-
-module.exports = Either;
+export default function Either() {};
 
 const Left = function left(value) {
   this.value = value;

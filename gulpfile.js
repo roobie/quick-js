@@ -5,12 +5,11 @@ var gulp = require('gulp');
 require('babel-core/register');
 
 // register tasks
-require('./build_scripts/assets');
-require('./build_scripts/bundle');
-require('./build_scripts/test');
+require('./gulp/assets');
+require('./gulp/bundle');
+require('./gulp/test');
 
-
-gulp.task("default", [
+gulp.task('default', [
   'lint',
   'watch-lint',
   'robohydra',

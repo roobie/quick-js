@@ -8,9 +8,9 @@ A skeleton project using webpack and some nice loaders.
 
 if on windows, you get an error relating to `node-gyp`, please try
 
-`npm install --msvs_version=%VISUAL_STUDIO_VERSSION`
+`npm install --msvs_version=%VISUAL_STUDIO_VERSION`
 
-where `%VISUAL_STUDIO_VERSSION` is perhaps `2013` or `2012`
+where `%VISUAL_STUDIO_VERSION` is perhaps `2013` or `2012`
 
 # Building
 

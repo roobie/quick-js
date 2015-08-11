@@ -6,8 +6,7 @@ import { provided } from '../lib/predicates';
 //stream = flyd.stream,
 const m = require('mithril');
 
-//const ItemsRepo = require('../api/items');
-const UsersRepo = require('../api/users');
+const ItemsRepo = require('../api/items');
 
 const Either = require('../lib/Either');
 
@@ -15,19 +14,19 @@ const Either = require('../lib/Either');
 //R = require('ramda');
 
 const init = function init(cfg) {
-  const usersRepo = new UsersRepo(true);
+  const itemsRepo = new ItemsRepo(true);
   const state = {
-    users: [],
-    usersRepo,
+    items: [],
+    itemsRepo,
     expanded: !1,
     cfg
   };
 
-  usersRepo.list$.map(function (result) {
+  itemsRepo.list$.map(function (result) {
     Either.match(result, {
-      right: (users) => {
+      right: (items) => {
         state.message = '';
-        state.users = users;
+        state.items = items;
       },
       left: (reason) => {
         state.message = `Could not fetch users. ${reason.message}`;
@@ -48,10 +47,10 @@ const view = function view(state, cfg) {
       provided(state.message, () => m('div', state.message)),
       m('div', [
         m('button[type=button]', {
-          onclick: () => state.usersRepo.getList()
+          onclick: () => state.itemsRepo.getList()
         }, 'Reload')
       ]),
-      m('div', state.users.map(function (it) {
+      m('div', state.items.map(function (it) {
         return m('pre', JSON.stringify(it, null, 2));
       }))
     ]), cfg);

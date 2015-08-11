@@ -1,17 +1,15 @@
 'use strict';
 
-if (typeof Function.prototype.bind !== 'function') {
-  require('../temp/phantom').init();
+import m from 'mithril';
+import env from '../env/current';
+
+if (!env) {
+  throw new Error('No environment specified. Please make sure to create the file /env/current.js');
 }
-
-const m = require('mithril')
-;
-
 
 //setup routes to start w/ the `#` symbol
 m.route.mode = 'hash';
 m.route(document.body, '/', {
   '/': require('./components/root'),
-  '/test': require('./components/root'),
-  '/clock': require('./components/clock')
+  '/test': require('./components/root')
 });

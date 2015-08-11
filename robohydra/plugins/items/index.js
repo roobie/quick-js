@@ -1,17 +1,17 @@
-var RoboHydraHeadStatic = require("robohydra").heads.RoboHydraHeadStatic;
+var RoboHydraHeadStatic = require('robohydra').heads.RoboHydraHeadStatic;
 
-exports.getBodyParts = function(conf) {
+exports.getBodyParts = function(/*conf*/) {
   return {
     heads: [
       new RoboHydraHeadStatic({
-        path: '/foo',
+        path: '/items/list',
         content: {
-          "success": true,
-          "results": [
-            {"url": "http://robohydra.org",
-             "title": "RoboHydra testing tool"},
-            {"url": "http://en.wikipedia.org/wiki/Hydra",
-             "title": "Hydra - Wikipedia"}
+          'success': true,
+          'results': [
+            {'url': 'http://robohydra.org',
+             'title': 'RoboHydra testing tool'},
+            {'url': 'http://en.wikipedia.org/wiki/Hydra',
+             'title': 'Hydra - Wikipedia'}
           ]
         }
       })

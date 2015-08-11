@@ -12,9 +12,8 @@ var buffer = require('vinyl-buffer');
 var babel = require("gulp-babel");
 var concat = require("gulp-concat");
 
-var jshint = require("gulp-jshint");
 var eslint = require('gulp-eslint');
-var jscs = require('gulp-jscs');
+//var jscs = require('gulp-jscs');
 
 var changed = require('gulp-changed');
 var serve = require('gulp-serve');
@@ -54,7 +53,10 @@ var b = watchify(browserify(opts))
 function bundle() {
   return b.bundle()
     // log errors if they happen
-    .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+    //.on('error', gutil.log.bind(gutil, 'Browserify Error'))
+    .on('error', function (reason) {
+      gutil.log(reason.message);
+    })
     .pipe(source('bundle.js'))
     // optional, remove if you don't need to buffer file contents
     .pipe(buffer())

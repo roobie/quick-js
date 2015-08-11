@@ -1,23 +1,27 @@
 'use strict';
 
-const flyd = require('flyd');
-const stream = flyd.stream;
-const Either = require('../lib/Either');
+import { stream } from 'flyd';
+import Either from '../lib/Either';
+import request from './request';
+import m from 'mithril';
 
-require('whatwg-fetch');
-require('es6-promise');
+import { API_ROOT } from '../../env/current';
+const API_URL = `${API_ROOT}/items/list`;
 
-const API_ROOT = 'http://localhost:5557';
-const API_URL = `${API_ROOT}/item/list`;
 
-const request = require('./request');
-
-const ItemsRepo = function ItemsRepo() {
+export const ItemsRepo = function ItemsRepo(load) {
   this.list$ = stream(Either.right([]));
+
+  if (load) {
+    this.getList();
+  }
 };
 
 ItemsRepo.prototype.getList = function () {
-  const promise = fetch(API_URL);
+  const promise = m.request({
+    method: 'GET',
+    url: API_URL
+  });
 
   return request(promise, this.list$);
 };
