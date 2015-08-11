@@ -1,14 +1,11 @@
 'use strict';
 
-import {and} from "trine/boolean/and";
+import {and} from 'trine/boolean/and';
 
-console.log(true::and(false))
+console.log(true::and(false));
 
 const flyd = require('flyd');
-const stream = flyd.stream;
 const m = require('mithril');
-
-const Either = require('../lib/Either');
 
 const every = function(dur) {
   var s = flyd.stream();
@@ -52,7 +49,7 @@ const view = function (state) {
       'background-color': '#333',
       transform: rot
     };
-    return {};
+    return {a};
   };
 
   return layout(state, () => m('div.clock', [

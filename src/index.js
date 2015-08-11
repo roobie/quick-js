@@ -4,7 +4,7 @@ if (typeof Function.prototype.bind !== 'function') {
   require('../temp/phantom').init();
 }
 
-var m = require('mithril')
+const m = require('mithril')
 ;
 
 

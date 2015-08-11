@@ -1,19 +1,18 @@
 'use strict';
 
-const flyd = require('flyd');
+import { provided } from '../lib/predicates';
+
+//const flyd = require('flyd');
 //stream = flyd.stream,
 const m = require('mithril');
 
-const ItemsRepo = require('../api/items');
+//const ItemsRepo = require('../api/items');
 const UsersRepo = require('../api/users');
 
 const Either = require('../lib/Either');
 
 //fjs = require('functional.js'),
 //R = require('ramda');
-
-window.aug = require('../lib/aug');
-
 
 const init = function init(cfg) {
   const usersRepo = new UsersRepo(true);
@@ -39,15 +38,9 @@ const init = function init(cfg) {
   return state;
 };
 
-const provided = function (p, fn) {
-  if (p) {
-    return fn();
-  }
-};
-
 const view = function view(state, cfg) {
   document.title = 'Root';
-  let layout = require('../layout/main');
+  const layout = require('../layout/main');
 
   return layout(state, () =>
     m('div', [

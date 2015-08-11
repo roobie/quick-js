@@ -1,8 +1,8 @@
 'use strict';
 
-var expect = require('chai').expect;
+const expect = require('chai').expect;
 
-let greet = (n) => 'hello, ' + n;
+const greet = (n) => 'hello, ' + n;
 
 describe('phantomjs', () => {
   it('should have the Function.prototype.bind polyfill', () => {

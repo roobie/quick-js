@@ -1,36 +1,20 @@
 'use strict';
 
-const m = require('mithril');
-const Either = require('../lib/Either');
+import Either from '../lib/Either';
 
-const request = function (promise, stream) {
-  m.startComputation();
+export default function request(promise, stream) {
 
   const done = function (either) {
     stream(either);
-
-    m.endComputation();
     return either;
   };
 
-  const isSuccess = function (status) {
-    return 200 <= status && status < 300;
-  };
-
   const unwrapSuccess = function (result) {
-    return result.json().then(function (data) {
-      if (isSuccess(result.status)) {
-        return done(Either.right(data));
-      }
-
-      return done(Either.left(data));
-    });
+    return done(Either.right(result));
   };
   const unwrapFail = function (reason) {
     return done(Either.left(reason));
   };
 
   return promise.then(unwrapSuccess, unwrapFail);
-};
-
-module.exports = request;
+}
