@@ -3,6 +3,7 @@
   "plugins": [
     "cors",
     "items",
-    "serve"
+    "serve",
+    "logger"
   ]
 }
