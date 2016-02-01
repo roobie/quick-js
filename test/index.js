@@ -10,6 +10,7 @@ test('Tests run', (assert) => {
 
 test('Greet World', (assert) => new Promise((resolve) => {
   assert.equal(1, 1);
+  assert.ok(samaritan);
 
   setTimeout(() => {
     // do some async stuff
