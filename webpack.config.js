@@ -14,6 +14,26 @@ var uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
   sourceMap: true
 });
 
+var loaders = [
+  { test: /\.html$/
+    , loader: 'html'
+    , include: [
+      path.resolve('./source'),
+      path.resolve('./test')
+    ]
+  },
+  { test: /\.js$/
+    , loader: 'babel'
+    , query: {
+      presets: ['es2015', 'stage-1'],
+      plugins: ['transform-object-assign']
+    }
+    , include: [
+      path.resolve('./source'),
+      path.resolve('./test')
+    ]
+  }
+];
 
 module.exports = [
   // test bundle configuration
@@ -31,16 +51,7 @@ module.exports = [
       preLoaders: [
         eslintLoader
       ],
-      loaders: [
-        {
-          test: /\.js$/,
-          loader: 'babel',
-          query: {
-            presets: ['es2015', 'stage-1'],
-            plugins: ['transform-object-assign']
-          }
-        }
-      ]
+      loaders: loaders
     },
     eslint: {
      configFile: './.eslintrc'
@@ -64,23 +75,10 @@ module.exports = [
       preLoaders: env === 'development' ? [
         eslintLoader
       ] : [],
-      loaders: [
-        { test: /\.html$/
-        , loader: 'html'
-        , include: path.resolve('./source')
-        },
-        { test: /\.js$/
-        , loader: 'babel'
-        , query: {
-            presets: ['es2015', 'stage-1'],
-            plugins: ['transform-object-assign']
-          }
-        , include: path.resolve('./source')
-        }
-      ]
+      loaders: loaders
     },
     resolve: {
-      extensions: ['', '.js']
+      extensions: ['', '.js', '.html']
     },
     stats: {
       colors: true
