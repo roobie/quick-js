@@ -21,8 +21,8 @@ module.exports = [
     target: 'node',
     entry: './test/index.js',
     output: {
-      path: 'output',
-      filename: 'test.js'
+      filename: 'test.js',
+      path: path.resolve('./build')
     },
     plugins: [
       new TapSpecWebpackPlugin()
