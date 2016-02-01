@@ -1,21 +1,27 @@
-# Quick JS
+# clubs [![Circle CI](https://circleci.com/gh/roobie/clubs/tree/master.svg?style=svg)](https://circleci.com/gh/roobie/clubs/tree/master)
+[![Travis-CI](https://travis-ci.org/roobie/clubs.svg)](https://travis-ci.org/roobie/clubs)
 
-A skeleton project using webpack and some nice loaders.
+js stuff
 
-# Installing deps
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Contents
 
-`npm install` should work
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Contributing](#contributing)
 
-if on windows, you get an error relating to `node-gyp`, please try
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-`npm install --msvs_version=%VISUAL_STUDIO_VERSSION`
+## Features
 
-where `%VISUAL_STUDIO_VERSSION` is perhaps `2013` or `2012`
+No features yet
 
-# Building
+## Getting Started
 
-`npm run compile`
+Add your getting started instructions here.
 
-# Running a dev server
+## Contributing
 
-`npm run serve` in the root directory.
+- [Contributing](docs/contributing/index.md)
+  - [Versions: Release Names vs Version Numbers](docs/contributing/versions/index.md)
