@@ -1,12 +1,5 @@
-'use strict';
 
-if (typeof Function.prototype.bind !== 'function') {
-  require('../temp/phantom').init();
-}
-
-var
-hello = require('./components/greet')
-;
+import {hello} from './components/greet';
 
 // test
 console.log(hello('kewl guy'));

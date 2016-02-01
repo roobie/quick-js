@@ -1,3 +1,5 @@
 'use strict';
 
-module.exports = (name) => 'hello, ' + name;
+export const hello = (name) => 'hello, ' + name;
+
+
