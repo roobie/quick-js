@@ -12,6 +12,7 @@
     "build:min": "node scripts/buildProduction.js",
     "build:doc": "doctoc --github --title \"## Contents\" ./",
     "start": "webpack --watch",
+    "serve": "webpack-dev-server --colors --hot --content-base build/",
     "test": "babel-node test/index.js",
     "cov": "npm run cov:clean && npm run cov:generate",
     "cov:clean": "rimraf coverage",
@@ -50,7 +51,8 @@
     "nsp": "^2.0.0",
     "rimraf": "^2.4.2",
     "tap-spec": "^4.1.1",
-    "webpack": "^1.11.0"
+    "webpack": "^1.11.0",
+    "webpack-dev-server": "^1.14.1"
   },
   "author": "BR <>",
   "license": "MIT",
@@ -61,5 +63,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/roobie/quick-js.git"
+  },
+  "dependencies": {
+    "geval": "^2.1.1"
   }
 }
