@@ -1,3 +1,5 @@
+require('html!./index.html');
+
 import Event from 'geval';
 import samaritan from './samaritan';
 
