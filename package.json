@@ -1,5 +1,5 @@
 {
-  "name": "clubs",
+  "name": "quick-js",
   "description": "js stuff",
   "version": "1.0.0",
   "main": "build/index.js",
@@ -55,11 +55,11 @@
   "author": "BR <>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/roobie/clubs/issues"
+    "url": "https://github.com/roobie/quick-js/issues"
   },
-  "homepage": "https://github.com/roobie/clubs",
+  "homepage": "https://github.com/roobie/quick-js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/roobie/clubs.git"
+    "url": "https://github.com/roobie/quick-js.git"
   }
 }

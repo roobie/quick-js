@@ -2093,7 +2093,7 @@
 	    return 'Hello, ' + (name || 'Anonymous') + '!';
 	  };
 
-	  return '1' + format();
+	  return '' + format();
 	}
 
 	exports.default = hello;
