@@ -1,7 +1,7 @@
 function hello (name) {
   const format = () => `Hello, ${name || 'Anonymous'}!`;
 
-  return '1' + format();
+  return '' + format();
 }
 
 
