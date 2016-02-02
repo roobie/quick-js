@@ -1,21 +1,7 @@
 import Event from 'geval';
 import pattern from './non_printable_char_re';
-
-const every = function (howMuch) {
-  let intervalId = null;
-  let counter = 0;
-  const result = {
-    stream: Event(broadcast => {
-      intervalId = setInterval(
-        () => broadcast(counter += howMuch),
-        howMuch
-      );
-    }),
-    destroy: () => clearInterval(intervalId)
-  };
-
-  return result;
-};
+import every from './every';
+import fulfiller from './fulfiller';
 
 const printableChars = new Array(0xff).join(' ').split(' ')
         .map(function (_, i) {
@@ -31,8 +17,12 @@ function randomChar() {
 }
 
 function getRandomCharStream(targetChar) {
-  const ticker = every(Math.random() * 200 | 0);
-  const timer = ticker.stream;
+  const dispose = fulfiller();
+  const ticker = every(
+    Math.random() * 170 | 0,
+    dispose.promise);
+
+  const timer = ticker;
   const max = 30;
   let count = 0;
 
@@ -43,15 +33,17 @@ function getRandomCharStream(targetChar) {
       count++;
 
       if (hasRunOnce() && atTarget()) {
-        ticker.destroy();
+        dispose();
         release();
         broadcast({
           done: true,
+          target: targetChar,
           char: targetChar
         });
       } else {
         broadcast({
           done: false,
+          target: targetChar,
           char: randomChar()
         });
       }

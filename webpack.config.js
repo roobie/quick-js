@@ -3,6 +3,7 @@ var path = require('path');
 var env = process.env.NODE_ENV || 'development';
 var minify = process.env.MINIFY || false;
 var TapSpecWebpackPlugin = require('./scripts/tap-spec-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var eslintLoader = {
   test: /\.js$/,
@@ -15,13 +16,6 @@ var uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
 });
 
 var loaders = [
-  { test: /\.html$/
-    , loader: 'html'
-    , include: [
-      path.resolve('./source'),
-      path.resolve('./test')
-    ]
-  },
   { test: /\.js$/
     , loader: 'babel'
     , query: {
@@ -65,6 +59,7 @@ module.exports = [
       path: path.resolve('./build')
     },
     plugins: [
+      new HtmlWebpackPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: '"' + env + '"'
