@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "clean": "rimraf build",
-    "lint": "eslint source test",
+    "lint": "standard --fix source test",
     "prebuild": "npm run clean",
     "build": "npm run build:webpack && npm run build:min && npm run build:doc",
     "build:webpack": "node scripts/buildWebpack.js",
@@ -56,6 +56,7 @@
     "nsp": "^2.0.0",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.4.2",
+    "standard": "^10.0.2",
     "style-loader": "^0.13.0",
     "tap-spec": "^4.1.1",
     "tween.js": "^16.3.4",

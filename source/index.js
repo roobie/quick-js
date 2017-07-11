@@ -26,11 +26,11 @@ function init() {
   const stream = samaritan(Event(broadcast => {
     const dispose = fulfiller();
     const ticker = every(200, dispose.promise);
-    //const message = 'I am legion' || `
-    const message = `
-I am Cybre. Kneel before me,
-or suffer the wrath of gods.
-`;
+    const message = `In a night, or in a day,
+In a vision, or in none,
+Is it therefore the less gone?
+All that we see or seem
+Is but a dream within a dream.`;
 
     let track = [];
     const release = ticker(() => {
@@ -39,7 +39,7 @@ or suffer the wrath of gods.
       if (next === void 0) {
         dispose();
         release();
-        timeout(5000)
+        timeout(9000)
           .then(() => vanish({
             element: outputEl,
             duration: 9999
@@ -66,11 +66,14 @@ or suffer the wrath of gods.
     outputEl.appendChild(charEl);
 
     const release = chStream(val => {
-      charEl.textContent = val.char;
-
-      if (val.target === '.') {
+      if (['\n'].includes(val.target)) {
+        charEl.textContent = ' ';
         charEl.appendChild(document.createElement('br'));
       }
+      else {
+        charEl.textContent = val.char;
+      }
+
       if (val.done) {
         release();
       }
