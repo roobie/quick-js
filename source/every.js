@@ -1,17 +1,17 @@
-import Event from 'geval';
+import Event from 'geval'
 
-export default function every(howMuch, disposePromise) {
-  let counter = 0;
+export default function every (howMuch, disposePromise) {
+  let counter = 0
 
   return Event(broadcast => {
-      const intervalId = setInterval(
+    const intervalId = setInterval(
         () => broadcast(counter += howMuch),
         howMuch
-      );
+      )
 
-      const destroy = () => clearInterval(intervalId);
-      if (typeof (disposePromise || {}).then === 'function') {
-        disposePromise.then(destroy);
-      }
-  });
+    const destroy = () => clearInterval(intervalId)
+    if (typeof (disposePromise || {}).then === 'function') {
+      disposePromise.then(destroy)
+    }
+  })
 }

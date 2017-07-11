@@ -1,4 +1,4 @@
-export default function timeout(duration, optionalCancel) {
+export default function timeout (duration, optionalCancel) {
   /**
    @parameter `duration`:Number
    - the duration as passed to the underlying impl. Usually ms.
@@ -12,13 +12,13 @@ export default function timeout(duration, optionalCancel) {
    has gone by, or rejected if cancelled by user.
    */
   return new Promise((resolve, reject) => {
-    const id = setTimeout(resolve, duration);
+    const id = setTimeout(resolve, duration)
 
     if (typeof (optionalCancel || {}).then === 'function') {
       optionalCancel.then(() => {
-        clearTimeout(id);
-        reject(new Error('Cancelled'));
-      });
+        clearTimeout(id)
+        reject(new Error('Cancelled'))
+      })
     }
-  });
+  })
 }

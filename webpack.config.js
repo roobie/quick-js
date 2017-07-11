@@ -1,33 +1,33 @@
-var webpack = require('webpack');
-var path = require('path');
-var env = process.env.NODE_ENV || 'development';
-var minify = process.env.MINIFY || false;
-var TapSpecWebpackPlugin = require('./scripts/tap-spec-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack')
+var path = require('path')
+var env = process.env.NODE_ENV || 'development'
+var minify = process.env.MINIFY || false
+var TapSpecWebpackPlugin = require('./scripts/tap-spec-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 var eslintLoader = {
   test: /\.js$/,
   loaders: ['eslint'],
   include: path.resolve('./source')
-};
+}
 
 var uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
   sourceMap: true
-});
+})
 
 var loaders = [
-  { test: /\.js$/
-    , loader: 'babel'
-    , query: {
+  { test: /\.js$/,
+    loader: 'babel',
+    query: {
       presets: ['es2015', 'stage-1'],
       plugins: ['transform-object-assign']
-    }
-    , include: [
+    },
+    include: [
       path.resolve('./source'),
       path.resolve('./test')
     ]
   }
-];
+]
 
 module.exports = [
   // test bundle configuration
@@ -48,7 +48,7 @@ module.exports = [
       loaders: loaders
     },
     eslint: {
-     configFile: './.eslintrc'
+      configFile: './.eslintrc'
     }
   },
   {
@@ -64,7 +64,7 @@ module.exports = [
         'process.env': {
           NODE_ENV: '"' + env + '"'
         }
-      }),
+      })
     ].concat(minify ? [uglifyPlugin] : []),
     module: {
       preLoaders: env === 'development' ? [
@@ -82,4 +82,4 @@ module.exports = [
       configFile: './.eslintrc'
     }
   }
-];
+]

@@ -3,9 +3,14 @@
   "description": "js stuff",
   "version": "1.0.0",
   "main": "build/index.js",
+  "standard": {
+    "ignore": [
+      "scripts/*"
+    ]
+  },
   "scripts": {
     "clean": "rimraf build",
-    "lint": "standard --fix source test",
+    "lint": "standard --fix",
     "prebuild": "npm run clean",
     "build": "npm run build:webpack && npm run build:min && npm run build:doc",
     "build:webpack": "node scripts/buildWebpack.js",
