@@ -5,12 +5,6 @@ var minify = process.env.MINIFY || false
 var TapSpecWebpackPlugin = require('./scripts/tap-spec-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
-var eslintLoader = {
-  test: /\.js$/,
-  loaders: ['eslint'],
-  include: path.resolve('./source')
-}
-
 var uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
   sourceMap: true
 })
@@ -43,12 +37,8 @@ module.exports = [
     ],
     module: {
       preLoaders: [
-        eslintLoader
       ],
       loaders: loaders
-    },
-    eslint: {
-      configFile: './.eslintrc'
     }
   },
   {
@@ -68,7 +58,6 @@ module.exports = [
     ].concat(minify ? [uglifyPlugin] : []),
     module: {
       preLoaders: env === 'development' ? [
-        eslintLoader
       ] : [],
       loaders: loaders
     },
